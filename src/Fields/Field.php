@@ -17,6 +17,7 @@ use Aerni\LivewireForms\Fields\Properties\WithShowLabel;
 use Aerni\LivewireForms\Fields\Properties\WithView;
 use Aerni\LivewireForms\Fields\Properties\WithWidth;
 use Aerni\LivewireForms\Fields\Properties\WithWireModelModifier;
+use Illuminate\Support\Facades\Lang;
 use Statamic\Fields\Field as StatamicField;
 use Statamic\Support\Str;
 
@@ -51,6 +52,15 @@ abstract class Field
     public function field(): StatamicField
     {
         return $this->field;
+    }
+
+    protected function translate(string $key): ?string
+    {
+        $translationKey = "livewire-forms.{$this->field()->parent()->handle()}.{$this->handle()}.{$key}";
+
+        return Lang::has($translationKey)
+            ? __($translationKey)
+            : __($this->field->get($key));
     }
 
     protected function get(string $key): mixed

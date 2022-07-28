@@ -6,6 +6,6 @@ trait WithPlaceholder
 {
     protected function placeholderProperty(): ?string
     {
-        return __($this->field->get('placeholder'));
+        return $this->translate('placeholder');
     }
 }

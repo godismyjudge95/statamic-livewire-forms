@@ -6,6 +6,6 @@ trait WithInlineLabel
 {
     protected function inlineLabelProperty(): ?string
     {
-        return __($this->field->get('inline_label'));
+        return $this->translate('inline_label');
     }
 }

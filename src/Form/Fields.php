@@ -101,6 +101,8 @@ class Fields
     protected function hydrateFields(): self
     {
         $this->fields = $this->form->fields()->map(function ($field) {
+            $field->setParent($this->form);
+
             $class = $this->models->get($field->handle())
                 ?? $this->models->get($field->fieldtype()::class);
 

@@ -7,7 +7,11 @@ trait WithOptions
     protected function optionsProperty(): array
     {
         return collect($this->field->get('options'))
-            ->mapWithKeys(fn ($value, $key) => is_numeric($key) ? [$value => __($value)] : [$key => __($value)])
+            ->mapWithKeys(function ($value, $key) {
+                return is_numeric($key)
+                    ? [$value => $this->translate("options.{$key}")]
+                    : [$key => $this->translate("options.{$key}")];
+            })
             ->toArray();
     }
 }
